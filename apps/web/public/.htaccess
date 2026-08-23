@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+	# Cache the HTML shell on the CDN but always revalidate in the browser
+	Header set Cache-Control "public, s-maxage=604800, max-age=0"
+
+	# Fingerprinted build assets are immutable — cache hard in the browser
+	<If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+		Header set Cache-Control "public, max-age=604800"
+	</If>
+</IfModule>
