@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Briefcase, CheckCircle2, ArrowRight, MessageSquare } from 'lucide-react';
 
 const WorkWithMePage = () => {
+  const [form, setForm] = useState({ name: '', email: '', projectType: 'Marketplace Strategy', message: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Work inquiry: ${form.projectType}`);
+    const body = encodeURIComponent(
+      `${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ''}\nProject type: ${form.projectType}`
+    );
+    // No backend: open the visitor's email client prefilled. Nothing is sent by us.
+    window.location.href = `mailto:derekcbowen@outlook.com?subject=${subject}&body=${body}`;
+  };
+
   const packages = [
     {
       title: "Marketplace Strategy Session",
@@ -175,20 +187,20 @@ const WorkWithMePage = () => {
             <p className="text-gray-400">Tell me a bit about your project and what you're looking to achieve.</p>
           </div>
           
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300">Name</label>
-                <input type="text" className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors" placeholder="John Doe" />
+                <input type="text" required value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors" placeholder="John Doe" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300">Email</label>
-                <input type="email" className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors" placeholder="john@example.com" />
+                <input type="email" required value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors" placeholder="john@example.com" />
               </div>
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">Project Type</label>
-              <select className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors appearance-none">
+              <select value={form.projectType} onChange={(e) => setForm((f) => ({ ...f, projectType: e.target.value }))} className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors appearance-none">
                 <option>Marketplace Strategy</option>
                 <option>Programmatic SEO</option>
                 <option>Advisory / Retainer</option>
@@ -197,10 +209,10 @@ const WorkWithMePage = () => {
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">Message</label>
-              <textarea rows="4" className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors" placeholder="Briefly describe your current challenges..."></textarea>
+              <textarea rows="4" required value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} className="w-full bg-[#0A0E27] border border-white/20 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-[#00D9FF] transition-colors" placeholder="Briefly describe your current challenges..."></textarea>
             </div>
             <button type="submit" className="w-full py-4 rounded-lg bg-[#00D9FF] text-[#0A0E27] font-bold text-lg hover:bg-[#00b8e6] transition-colors flex items-center justify-center gap-2">
-              Send Message <ArrowRight className="w-5 h-5" />
+              Compose Email <ArrowRight className="w-5 h-5" />
             </button>
           </form>
         </div>

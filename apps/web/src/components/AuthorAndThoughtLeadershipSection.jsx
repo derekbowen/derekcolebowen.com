@@ -51,7 +51,7 @@ const AuthorAndThoughtLeadershipSection = () => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#ff00ff]/40 to-[#00d4ff]/40 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+                src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
                 alt="Derek Bowen - Author" 
                 className="relative z-10 w-full h-80 object-cover rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(255,0,255,0.2)]"
               />

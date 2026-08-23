@@ -64,7 +64,7 @@ const AboutPage = () => {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff00ff]/30 to-[#00d4ff]/30 rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
             <img 
-              src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+              src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
               alt="Derek Bowen Portrait" 
               className="relative z-10 w-full h-[500px] object-cover rounded-3xl border border-white/10 shadow-[0_0_40px_rgba(255,0,255,0.2)]"
             />
@@ -114,7 +114,7 @@ const AboutPage = () => {
             <div className="relative group overflow-hidden rounded-2xl border border-white/10 lg:col-span-2 lg:row-span-2">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/9c3773f620ee0711b3a8be35b39cfd6c.jpg" 
+                src="/images/9c3773f620ee0711b3a8be35b39cfd6c.jpg" 
                 alt="Dodgers Stadium" 
                 className="w-full h-full min-h-[300px] lg:min-h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -130,7 +130,7 @@ const AboutPage = () => {
             <div className="relative group overflow-hidden rounded-2xl border border-white/10">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/6e71c7f400ffa28dd0705bf9c4008141.jpg" 
+                src="/images/6e71c7f400ffa28dd0705bf9c4008141.jpg" 
                 alt="Community" 
                 className="w-full h-full min-h-[240px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -145,7 +145,7 @@ const AboutPage = () => {
             <div className="relative group overflow-hidden rounded-2xl border border-white/10">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/1bd7ee8b379b2084f0bb4f167a431e8d.jpg" 
+                src="/images/1bd7ee8b379b2084f0bb4f167a431e8d.jpg" 
                 alt="Relationships" 
                 className="w-full h-full min-h-[240px] object-cover group-hover:scale-105 transition-transform duration-700"
               />

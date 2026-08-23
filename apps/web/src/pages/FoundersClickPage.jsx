@@ -7,42 +7,42 @@ const features = [
   {
     title: "SEO Intelligence Suite",
     description: "Stop guessing what your competitors are doing. Our suite provides a complete competitor radar, daily rank tracking, and an AI-powered page auditor. Identify link auditing opportunities and uncover high-value keywords before your competition does.",
-    image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/787d57654434be50d684f4be85d21eec.png",
+    image: "/images/787d57654434be50d684f4be85d21eec.png",
     highlights: ["Competitor radar & rank tracking", "AI page auditor", "Link auditing & keyword opportunities"],
     reverse: false
   },
   {
     title: "Dashboard & Command Center",
     description: "Your morning command center. Start every day with AI-ranked action items and live KPIs. Six organized tabs give you a bird's-eye view of your marketplace's health, ensuring you always know exactly what to focus on next.",
-    image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/87be2119cedef29c38f790d8fe8f09cd.png",
+    image: "/images/87be2119cedef29c38f790d8fe8f09cd.png",
     highlights: ["AI-ranked daily action items", "Live marketplace KPIs", "6 organized operational tabs"],
     reverse: true
   },
   {
     title: "AI-Powered Content Factory",
     description: "Scale your programmatic SEO effortlessly. Generate highly optimized pages at just $0.012 per page. Utilize bulk editing tools and auto-generate blog content that drives organic traffic without the massive agency retainer.",
-    image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/63d0600096f3b5319d0a17229ae32034.png",
+    image: "/images/63d0600096f3b5319d0a17229ae32034.png",
     highlights: ["Generate pages at $0.012/page", "Bulk editing capabilities", "Auto-generated blog content"],
     reverse: false
   },
   {
     title: "Users & Ops Management",
     description: "Streamline your marketplace operations. Manage your lead inbox, verify emails automatically, and hunt for social leads. Keep your directory clean with robust moderation and admin tools built specifically for Sharetribe.",
-    image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/2c5e2f32abc7de6f587d00b1a298d283.png",
+    image: "/images/2c5e2f32abc7de6f587d00b1a298d283.png",
     highlights: ["Centralized lead inbox", "Automated email verification", "Directory moderation tools"],
     reverse: true
   },
   {
     title: "Built for Founders",
     description: "Get the power of a full development and marketing team at a fraction of the cost. Move at AI speed, maintain absolute clarity on your growth metrics, and scale your marketplace without the traditional overhead.",
-    image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/312862cc17e7827ce523f94617af8d7f.png",
+    image: "/images/312862cc17e7827ce523f94617af8d7f.png",
     highlights: ["Fraction of agency costs", "Move at AI speed", "Always know what to do next"],
     reverse: false
   },
   {
     title: "Full Platform Overview",
     description: "Everything you need, integrated into one seamless platform. From initial lead generation to final conversion, founders.click provides the end-to-end infrastructure required to build a dominant Sharetribe marketplace.",
-    image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/76c88ce5e5e006b6746fb53a498e0918.png",
+    image: "/images/76c88ce5e5e006b6746fb53a498e0918.png",
     highlights: ["End-to-end infrastructure", "Seamless integration", "Built specifically for Sharetribe"],
     reverse: true
   }

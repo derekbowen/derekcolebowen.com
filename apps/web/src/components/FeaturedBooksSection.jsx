@@ -8,21 +8,21 @@ const FeaturedBooksSection = () => {
     {
       title: "Running a Smarter Carnival",
       description: "A comprehensive guide to modernizing and optimizing carnival operations using technology and smart logistics.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/7b824083a76e2030c170f96771b6aa63.jpg",
+      image: "/images/7b824083a76e2030c170f96771b6aa63.jpg",
       link: "#",
       color: "cyan"
     },
     {
       title: "Turn Your Swimming Pool Into a Goldmine",
       description: "The ultimate playbook for monetizing your private pool, maximizing bookings, and creating a profitable side hustle.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/d0c43979def7fc909b39004e26016c68.jpg",
+      image: "/images/d0c43979def7fc909b39004e26016c68.jpg",
       link: "#",
       color: "blue"
     },
     {
       title: "The Pool Rental & Spa Playbook",
       description: "Advanced strategies for scaling your pool rental business, managing guests, and optimizing your listing for top performance.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/210c235599e99252f61be9a5fc6a9a97.webp",
+      image: "/images/210c235599e99252f61be9a5fc6a9a97.webp",
       link: "#",
       color: "magenta"
     }

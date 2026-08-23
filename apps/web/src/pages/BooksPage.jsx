@@ -10,7 +10,7 @@ const BooksPage = () => {
       subtitle: "State-by-State Laws, Safety, Permits, and Best Practices",
       author: "Derek Bowen",
       description: "A comprehensive guide covering everything you need to know about renting your swimming pool, including state-by-state regulations, safety requirements, permits, and industry best practices.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/df6368ea3d2e8bdbdbf1c46bc7113e1c.png",
+      image: "/images/df6368ea3d2e8bdbdbf1c46bc7113e1c.png",
       link: "https://a.co/d/08L1TQZ0",
       color: "cyan",
       published: "2024"
@@ -19,7 +19,7 @@ const BooksPage = () => {
       title: "Running a Smarter Carnival",
       author: "Derek Bowen",
       description: "A comprehensive guide to modernizing and optimizing carnival operations using technology, smart logistics, and efficient management systems. Learn how to streamline your amusement business for maximum profitability.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/7b824083a76e2030c170f96771b6aa63.jpg",
+      image: "/images/7b824083a76e2030c170f96771b6aa63.jpg",
       link: "#",
       color: "cyan",
       published: "2023"
@@ -28,7 +28,7 @@ const BooksPage = () => {
       title: "Turn Your Swimming Pool Into a Goldmine",
       author: "Derek Bowen",
       description: "The ultimate playbook for monetizing your private pool. Discover how to attract renters, set competitive pricing, and create a profitable side hustle right in your backyard.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/d0c43979def7fc909b39004e26016c68.jpg",
+      image: "/images/d0c43979def7fc909b39004e26016c68.jpg",
       link: "#",
       color: "blue",
       published: "2023"
@@ -37,7 +37,7 @@ const BooksPage = () => {
       title: "The Pool Rental & Spa Playbook",
       author: "Derek Bowen",
       description: "Advanced strategies for scaling your pool rental business. Learn how to manage guests effectively, handle maintenance, and optimize your listing for top performance on rental platforms.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/210c235599e99252f61be9a5fc6a9a97.webp",
+      image: "/images/210c235599e99252f61be9a5fc6a9a97.webp",
       link: "#",
       color: "magenta",
       published: "2024"
@@ -46,7 +46,7 @@ const BooksPage = () => {
       title: "The Backyard Entrepreneur",
       author: "Derek Bowen",
       description: "Transform your unused outdoor space into a thriving business. This book covers various ways to monetize your backyard, from event hosting to specialized rentals.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/6c079eb3863471e238629a7b6ae430c0.webp",
+      image: "/images/6c079eb3863471e238629a7b6ae430c0.webp",
       link: "#",
       color: "cyan",
       published: "2024"
@@ -55,7 +55,7 @@ const BooksPage = () => {
       title: "Pool Host Riches",
       author: "Derek Bowen",
       description: "A deep dive into the financial aspects of pool hosting. Master the art of upselling, managing expenses, and maximizing your return on investment as a pool host.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/e6e3ce1f9a2feea4c11e0fe646787a86.webp",
+      image: "/images/e6e3ce1f9a2feea4c11e0fe646787a86.webp",
       link: "#",
       color: "blue",
       published: "2024"
@@ -64,7 +64,7 @@ const BooksPage = () => {
       title: "Honey, Do the Dishes",
       author: "Derek Bowen",
       description: "A practical and humorous look at balancing entrepreneurial ambitions with family life and household responsibilities. Strategies for maintaining harmony while building your empire.",
-      image: "https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/328ff7e0ac9a87b2c4f54499a96c787b.jpg",
+      image: "/images/328ff7e0ac9a87b2c4f54499a96c787b.jpg",
       link: "#",
       color: "magenta",
       published: "2022"

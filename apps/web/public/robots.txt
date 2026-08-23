@@ -1,0 +1,9 @@
+# Production robots for https://derekcolebowen.com
+# NOTE: staging (staging.derekcolebowen.com) is de-indexed separately by the
+# deploy workflow (X-Robots-Tag + a disallow-all robots.txt) and never inherits
+# this file.
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://derekcolebowen.com/sitemap.xml

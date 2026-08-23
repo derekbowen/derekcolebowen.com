@@ -1,0 +1,75 @@
+name: Deploy to Hostinger (staging)
+
+# Manual-only for now (workflow_dispatch). Builds the canonical repo and
+# publishes ONLY the static build output (dist/apps/web) to the Hostinger
+# STAGING document root. Production public_html is never touched here.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: staging-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Apply staging-only no-index (isolated from repo & production)
+        # These edits happen only to the CI build artifact, never in git, so
+        # production can never inherit the staging noindex.
+        run: |
+          set -e
+          DIST=dist/apps/web
+          test -f "$DIST/index.html" || { echo "build output missing"; exit 1; }
+          printf 'User-agent: *\nDisallow: /\n' > "$DIST/robots.txt"
+          {
+            echo ''
+            echo '# staging only: keep this host out of search indexes'
+            echo '<IfModule mod_headers.c>'
+            echo '  Header set X-Robots-Tag "noindex, nofollow"'
+            echo '</IfModule>'
+          } >> "$DIST/.htaccess"
+          echo "Applied staging robots.txt (Disallow: /) + X-Robots-Tag noindex."
+
+      # Default: FTPS. Works on every Hostinger plan and reliably uploads the
+      # .htaccess dotfile (needed for SPA routing + the staging noindex header).
+      # Set HOSTINGER_PORT=21 for this method.
+      - name: Deploy to Hostinger staging (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          protocol: ftps
+          server: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          local-dir: ./dist/apps/web/
+          server-dir: ${{ secrets.HOSTINGER_STAGING_PATH }}
+
+      # Alternative: SFTP (Hostinger Business+ plans with SSH enabled). To use
+      # it, comment out the FTPS step above, uncomment this one, and set
+      # HOSTINGER_PORT=22.
+      # - name: Deploy to Hostinger staging (SFTP)
+      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      #   with:
+      #     server: ${{ secrets.HOSTINGER_HOST }}
+      #     username: ${{ secrets.HOSTINGER_USERNAME }}
+      #     password: ${{ secrets.HOSTINGER_PASSWORD }}
+      #     port: ${{ secrets.HOSTINGER_PORT }}
+      #     local_path: './dist/apps/web/'
+      #     remote_path: ${{ secrets.HOSTINGER_STAGING_PATH }}
+      #     sftp_only: true

@@ -82,7 +82,7 @@ const ProfessionalSummarySection = () => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#00ff88]/30 to-[#00d4ff]/30 rounded-2xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/6e71c7f400ffa28dd0705bf9c4008141.jpg" 
+                src="/images/6e71c7f400ffa28dd0705bf9c4008141.jpg" 
                 alt="Derek Bowen Professional" 
                 className="relative z-10 w-full h-[400px] object-cover rounded-2xl border border-white/10 shadow-[0_0_40px_rgba(0,255,136,0.2)]"
               />

@@ -84,7 +84,7 @@ const BlogPage = () => {
           className="mb-12 p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col md:flex-row items-center gap-6"
         >
           <img 
-            src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+            src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
             alt="Derek Bowen" 
             className="w-24 h-24 rounded-full object-cover border-2 border-[#00ff88] shadow-[0_0_15px_rgba(0,255,136,0.3)] shrink-0"
           />
@@ -146,7 +146,7 @@ const BlogPage = () => {
                     {post.category}
                   </span>
                   <img 
-                    src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+                    src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
                     alt="Author" 
                     className="w-8 h-8 rounded-full object-cover border border-white/20"
                   />

@@ -56,7 +56,7 @@ const VenturesSection = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-[#00d4ff]/30 to-[#ff00ff]/30 rounded-xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
             <img 
-              src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/7621f4f481bc03a5ab5eca9ec90ac78c.jpg" 
+              src="/images/7621f4f481bc03a5ab5eca9ec90ac78c.jpg" 
               alt="Team Collaboration" 
               className="relative z-10 w-full h-48 object-cover rounded-xl border border-white/10 shadow-[0_0_20px_rgba(0,212,255,0.2)]"
             />

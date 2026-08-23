@@ -87,7 +87,7 @@ const BlogPostTemplate = ({ meta, header, intro, sections, relatedPosts }) => {
 
             <div className="flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10">
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+                src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
                 alt={header.author.name} 
                 className="w-16 h-16 rounded-full object-cover border-2 border-[#00D9FF]"
               />

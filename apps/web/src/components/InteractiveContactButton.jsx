@@ -6,13 +6,21 @@ import { useToast } from '@/hooks/use-toast';
 
 const InteractiveContactButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
   const { toast } = useToast();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const subject = encodeURIComponent(`Website message from ${form.name || 'a visitor'}`);
+    const body = encodeURIComponent(
+      `${form.message}\n\n— ${form.name}${form.email ? ` (${form.email})` : ''}`
+    );
+    // No backend: hand off to the visitor's own email client. We never claim to
+    // have sent anything ourselves.
+    window.location.href = `mailto:derekcbowen@outlook.com?subject=${subject}&body=${body}`;
     toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
+      title: "Opening your email app…",
+      description: "Your message is ready to send from your email client.",
     });
     setIsOpen(false);
   };
@@ -55,7 +63,7 @@ const InteractiveContactButton = () => {
           >
             <div className="p-6 border-b border-white/10 bg-gradient-to-r from-[#ff00ff]/10 to-transparent flex items-center gap-4">
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+                src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
                 alt="Derek Bowen" 
                 className="w-12 h-12 rounded-full object-cover border-2 border-[#ff00ff] shadow-[0_0_10px_rgba(255,0,255,0.5)]"
               />
@@ -91,16 +99,16 @@ const InteractiveContactButton = () => {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <input type="text" placeholder="Your Name" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#ff00ff] transition-colors" />
+                  <input type="text" placeholder="Your Name" required value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#ff00ff] transition-colors" />
                 </div>
                 <div>
-                  <input type="email" placeholder="Your Email" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#ff00ff] transition-colors" />
+                  <input type="email" placeholder="Your Email" required value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#ff00ff] transition-colors" />
                 </div>
                 <div>
-                  <textarea placeholder="Your Message" required rows={3} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#ff00ff] transition-colors resize-none" />
+                  <textarea placeholder="Your Message" required rows={3} value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#ff00ff] transition-colors resize-none" />
                 </div>
                 <Button type="submit" className="w-full bg-[#ff00ff] hover:bg-[#cc00cc] text-white font-semibold gap-2">
-                  <Send className="w-4 h-4" /> Send Message
+                  <Send className="w-4 h-4" /> Compose Email
                 </Button>
               </form>
             </div>

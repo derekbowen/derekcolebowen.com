@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
+import CanonicalTag from './components/CanonicalTag';
 import { Toaster } from '@/components/ui/toaster';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -27,6 +28,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import ServicesForDevelopersPage from './pages/ServicesForDevelopersPage';
 import FoundersClickPage from './pages/FoundersClickPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // Admin
 import { AdminAuthProvider } from './contexts/AdminAuthContext.jsx';
@@ -42,6 +44,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen bg-[#0A0E27]">
           <ScrollToTop />
+          <CanonicalTag />
           <Header />
           <main className="flex-grow pb-20 md:pb-0">
             <Routes>
@@ -91,8 +94,11 @@ function App() {
                   <ProtectedAdminRoute>
                     <AdminEditPostPage />
                   </ProtectedAdminRoute>
-                } 
+                }
               />
+
+              {/* Catch-all 404 */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
           <Footer />

@@ -108,7 +108,7 @@ const PortfolioPage = () => {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#00d4ff]/40 to-[#ff00ff]/40 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/59b0610f463f778a6bc3df34cf4389fd.jpg" 
+                src="/images/59b0610f463f778a6bc3df34cf4389fd.jpg" 
                 alt="Derek Bowen" 
                 className="relative z-10 w-40 h-40 object-cover rounded-full border-2 border-[#00d4ff] shadow-[0_0_20px_rgba(0,212,255,0.3)]"
               />
@@ -187,7 +187,7 @@ const PortfolioPage = () => {
             <div className="relative group overflow-hidden rounded-2xl border border-white/10">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/6e71c7f400ffa28dd0705bf9c4008141.jpg" 
+                src="/images/6e71c7f400ffa28dd0705bf9c4008141.jpg" 
                 alt="Team Collaboration" 
                 className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -202,7 +202,7 @@ const PortfolioPage = () => {
             <div className="relative group overflow-hidden rounded-2xl border border-white/10">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
               <img 
-                src="https://horizons-cdn.hostinger.com/d0673265-adb7-4362-8cbb-bb439167c2b5/7621f4f481bc03a5ab5eca9ec90ac78c.jpg" 
+                src="/images/7621f4f481bc03a5ab5eca9ec90ac78c.jpg" 
                 alt="Community Building" 
                 className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700"
               />
