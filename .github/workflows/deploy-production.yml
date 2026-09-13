@@ -1,0 +1,82 @@
+name: Deploy to Hostinger (PRODUCTION)
+
+# The live-site takeover. Manual only, and guarded: you must type PRODUCTION to
+# run it. It builds the canonical repo and publishes ONLY the static output
+# (dist/apps/web) to the PRODUCTION document root — replacing the Hostinger
+# Horizons build. It does NOT touch DNS and does NOT inject the staging noindex,
+# so production keeps its indexable robots.txt.
+#
+# DORMANT until you (1) add the HOSTINGER_PROD_PATH secret and (2) run it by hand.
+# Recommended: only run this after the staging workflow has been validated.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type PRODUCTION to deploy to the LIVE site'
+        required: true
+        default: ''
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require explicit confirmation
+        if: ${{ github.event.inputs.confirm != 'PRODUCTION' }}
+        run: |
+          echo "You must type PRODUCTION in the confirm box to deploy to the live site. Aborting."
+          exit 1
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Sanity-check build output
+        run: |
+          test -f dist/apps/web/index.html || { echo "build output missing"; exit 1; }
+          # Production must NOT carry a staging noindex.
+          if grep -qi "X-Robots-Tag" dist/apps/web/.htaccess; then
+            echo "Unexpected X-Robots-Tag in production build .htaccess"; exit 1
+          fi
+          echo "Production build looks good."
+
+      # Default: FTPS (works on every Hostinger plan; uploads the .htaccess dotfile).
+      # Set HOSTINGER_PORT=21. Does NOT delete unknown remote files (safer first
+      # cutover — leftover Horizons files stay until you clean them up).
+      - name: Deploy to Hostinger production (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          protocol: ftps
+          server: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          local-dir: ./dist/apps/web/
+          server-dir: ${{ secrets.HOSTINGER_PROD_PATH }}
+
+      # Alternative: SFTP (Hostinger Business+ with SSH). Comment out the FTPS step
+      # above, uncomment this, set HOSTINGER_PORT=22.
+      # - name: Deploy to Hostinger production (SFTP)
+      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      #   with:
+      #     server: ${{ secrets.HOSTINGER_HOST }}
+      #     username: ${{ secrets.HOSTINGER_USERNAME }}
+      #     password: ${{ secrets.HOSTINGER_PASSWORD }}
+      #     port: ${{ secrets.HOSTINGER_PORT }}
+      #     local_path: './dist/apps/web/'
+      #     remote_path: ${{ secrets.HOSTINGER_PROD_PATH }}
+      #     sftp_only: true
