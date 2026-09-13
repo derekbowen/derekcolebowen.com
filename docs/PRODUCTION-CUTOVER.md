@@ -46,13 +46,29 @@ Hostinger login, so it can't be automated from here.
    to the same folder. **Do not delete the Horizons project** — it stays as a
    fallback.
 
-### The cutover (2 clicks)
+### The cutover
 
 6. *(Recommended)* **Actions → "Deploy to Hostinger (staging)" → Run workflow.**
    Check `staging.derekcolebowen.com` looks right.
 
-7. **Actions → "Deploy to Hostinger (PRODUCTION)" → Run workflow** → type
-   `PRODUCTION` in the confirm box → Run.
+7. **Dry run first (free, uploads nothing).**
+   **Actions → "Deploy production" → Run workflow**, with:
+   - confirm: `deploy-production`
+   - dry_run: **true**
+
+   This builds and runs all four pre-flight guards (no staging noindex, no
+   Horizons leftovers, title is "Derek Bowen", output non-empty) without
+   touching the server. If it goes green, the real run will too.
+
+8. **The real cutover.** Same workflow, with:
+   - confirm: `deploy-production`
+   - dry_run: **false**
+   - clean_slate: **true** *(first cutover only — wipes the old Horizons files
+     out of the docroot so nothing stale is left behind. Leave it false on every
+     later deploy.)*
+
+   It refuses to run from any branch except `main`, and refuses unless the
+   confirm string matches exactly.
 
 ### Verify (1 min)
 

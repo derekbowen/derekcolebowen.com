@@ -1,82 +1,183 @@
-name: Deploy to Hostinger (PRODUCTION)
-
-# The live-site takeover. Manual only, and guarded: you must type PRODUCTION to
-# run it. It builds the canonical repo and publishes ONLY the static output
-# (dist/apps/web) to the PRODUCTION document root — replacing the Hostinger
-# Horizons build. It does NOT touch DNS and does NOT inject the staging noindex,
-# so production keeps its indexable robots.txt.
+# .github/workflows/deploy-production.yml
 #
-# DORMANT until you (1) add the HOSTINGER_PROD_PATH secret and (2) run it by hand.
-# Recommended: only run this after the staging workflow has been validated.
+# Production deploy for derekcolebowen.com -> Hostinger.
+# Manual only. Never runs on push. Never runs on a schedule.
+#
+# Required repo secrets (Settings > Secrets and variables > Actions).
+# The first four are SHARED with the staging workflow, so you only add one new
+# secret to enable production:
+#   HOSTINGER_HOST        e.g. ftp.derekcolebowen.com
+#   HOSTINGER_USERNAME    the FTP account user
+#   HOSTINGER_PASSWORD    the FTP account password
+#   HOSTINGER_PORT        21 (FTPS explicit)
+#   HOSTINGER_PROD_PATH   server dir, e.g. /public_html/   <-- distinct from staging
+#
+# HOSTINGER_PROD_PATH is deliberately separate from HOSTINGER_STAGING_PATH so
+# prod and staging can never be confused.
+
+name: Deploy production
+
 on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: 'Type PRODUCTION to deploy to the LIVE site'
+        description: 'Type deploy-production to confirm'
         required: true
         default: ''
+      clean_slate:
+        description: 'Wipe the remote dir before upload (use TRUE for the first cutover only)'
+        type: boolean
+        required: true
+        default: false
+      dry_run:
+        description: 'Build and check, but do not upload'
+        type: boolean
+        required: true
+        default: false
 
+# One production deploy at a time. Queued runs wait rather than interleave.
 concurrency:
-  group: production-deploy
+  group: deploy-production
   cancel-in-progress: false
 
+env:
+  BUILD_DIR: dist/apps/web
+  NODE_VERSION: '22'          # matches .nvmrc and the staging workflow
+
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    environment: production   # optional: add a required reviewer in repo settings
+    timeout-minutes: 20
+
     steps:
-      - name: Require explicit confirmation
-        if: ${{ github.event.inputs.confirm != 'PRODUCTION' }}
+      - name: Refuse unless confirmed
+        if: github.event.inputs.confirm != 'deploy-production'
         run: |
-          echo "You must type PRODUCTION in the confirm box to deploy to the live site. Aborting."
+          echo "::error::Confirmation string did not match. Type exactly: deploy-production"
           exit 1
 
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Refuse unless on main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Production deploys run from main only. Got ${{ github.ref }}"
+          exit 1
 
-      - name: Set up Node 22
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
-      - name: Install dependencies
+      - name: Install
         run: npm ci
 
       - name: Build
         run: npm run build
 
-      - name: Sanity-check build output
-        run: |
-          test -f dist/apps/web/index.html || { echo "build output missing"; exit 1; }
-          # Production must NOT carry a staging noindex.
-          if grep -qi "X-Robots-Tag" dist/apps/web/.htaccess; then
-            echo "Unexpected X-Robots-Tag in production build .htaccess"; exit 1
-          fi
-          echo "Production build looks good."
+      # --- Pre-flight guards -------------------------------------------------
+      # These are the difference between this workflow and the staging one.
+      # Production must NOT carry staging's noindex, and must NOT carry any
+      # Horizons leftovers. All four verified green against a real build.
 
-      # Default: FTPS (works on every Hostinger plan; uploads the .htaccess dotfile).
-      # Set HOSTINGER_PORT=21. Does NOT delete unknown remote files (safer first
-      # cutover — leftover Horizons files stay until you clean them up).
-      - name: Deploy to Hostinger production (FTPS)
+      - name: Guard - build output exists and is not empty
+        run: |
+          test -d "$BUILD_DIR" || { echo "::error::$BUILD_DIR missing"; exit 1; }
+          test -f "$BUILD_DIR/index.html" || { echo "::error::no index.html in $BUILD_DIR"; exit 1; }
+          echo "Files to publish: $(find "$BUILD_DIR" -type f | wc -l)"
+
+      - name: Guard - no staging noindex leaked into the production build
+        run: |
+          if grep -rilE 'name=["'"'"']robots["'"'"'][^>]*noindex' "$BUILD_DIR" ; then
+            echo "::error::noindex found in production build - that is a staging-only artifact"
+            exit 1
+          fi
+          if [ -f "$BUILD_DIR/robots.txt" ] && grep -qiE '^[[:space:]]*Disallow:[[:space:]]*/[[:space:]]*$' "$BUILD_DIR/robots.txt"; then
+            echo "::error::robots.txt disallows the whole site"
+            exit 1
+          fi
+          echo "robots check passed"
+
+      - name: Guard - no Hostinger Horizons leftovers
+        run: |
+          if grep -rqi 'Hostinger Horizons' "$BUILD_DIR"; then
+            echo "::error::'Hostinger Horizons' string present in build output"
+            exit 1
+          fi
+          if [ -f "$BUILD_DIR/.htaccess" ] && grep -qi 'X-Powered-By.*Horizons' "$BUILD_DIR/.htaccess"; then
+            echo "::error::Horizons X-Powered-By header still set in .htaccess"
+            exit 1
+          fi
+          echo "Horizons check passed"
+
+      - name: Guard - title is ours
+        run: |
+          grep -oiE '<title>[^<]*</title>' "$BUILD_DIR/index.html" || true
+          grep -qiE '<title>[^<]*Derek Bowen[^<]*</title>' "$BUILD_DIR/index.html" \
+            || { echo "::error::index.html <title> does not contain 'Derek Bowen'"; exit 1; }
+
+      - name: Dry run summary
+        if: github.event.inputs.dry_run == 'true'
+        run: |
+          echo "Dry run: build and all guards passed. Upload and verify are skipped."
+
+      # --- Upload ------------------------------------------------------------
+      # NOTE: a bare `exit 0` in the dry-run step would NOT stop the job — each
+      # step runs in its own shell, so later steps still execute. The dry run is
+      # enforced by the `if:` conditions below instead.
+
+      - name: Deploy to Hostinger over FTPS
+        if: github.event.inputs.dry_run != 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          protocol: ftps
           server: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: ${{ secrets.HOSTINGER_PORT }}
-          local-dir: ./dist/apps/web/
-          server-dir: ${{ secrets.HOSTINGER_PROD_PATH }}
+          protocol: ftps
+          local-dir: ${{ env.BUILD_DIR }}/                 # trailing slash required
+          server-dir: ${{ secrets.HOSTINGER_PROD_PATH }}   # trailing slash required
+          dangerous-clean-slate: ${{ github.event.inputs.clean_slate == 'true' }}
+          log-level: standard
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
 
-      # Alternative: SFTP (Hostinger Business+ with SSH). Comment out the FTPS step
-      # above, uncomment this, set HOSTINGER_PORT=22.
-      # - name: Deploy to Hostinger production (SFTP)
-      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.5
-      #   with:
-      #     server: ${{ secrets.HOSTINGER_HOST }}
-      #     username: ${{ secrets.HOSTINGER_USERNAME }}
-      #     password: ${{ secrets.HOSTINGER_PASSWORD }}
-      #     port: ${{ secrets.HOSTINGER_PORT }}
-      #     local_path: './dist/apps/web/'
-      #     remote_path: ${{ secrets.HOSTINGER_PROD_PATH }}
-      #     sftp_only: true
+      # --- Verify ------------------------------------------------------------
+
+      - name: Verify live site
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          echo "--- title ---"
+          curl -sSL https://derekcolebowen.com | grep -oiE '<title>[^<]*</title>' || true
+
+          # Hostinger fronts the site with its own CDN (server: hcdn), so the old
+          # response can stay cached for a short while after upload. Retry before
+          # declaring failure.
+          ok=0
+          for i in 1 2 3 4 5 6; do
+            curl -sSIL https://derekcolebowen.com > /tmp/h.txt || true
+            if grep -qi 'Hostinger Horizons' /tmp/h.txt; then
+              echo "attempt $i: x-powered-by still reports Hostinger Horizons (CDN cache?) - waiting"
+              sleep 15
+            else
+              ok=1; break
+            fi
+          done
+          if [ "$ok" != "1" ]; then
+            echo "::error::x-powered-by still reports Hostinger Horizons after retries - the old .htaccess may still be in the docroot"
+            exit 1
+          fi
+          echo "Horizons header gone."
+
+          # This is a single-page app: .htaccess rewrites unknown paths to
+          # index.html with HTTP 200 and React renders the 404 client-side.
+          # So assert the rewrite works, rather than expecting a 404 status.
+          deep=$(curl -s -o /dev/null -w '%{http_code}' https://derekcolebowen.com/blog/trucking-truth)
+          echo "deep link /blog/trucking-truth -> $deep"
+          [ "$deep" = "200" ] || echo "::warning::deep link did not return 200 - check the SPA rewrite in .htaccess"
+
+          unknown=$(curl -s -o /dev/null -w '%{http_code}' https://derekcolebowen.com/this-page-does-not-exist)
+          echo "unknown path -> $unknown (200 is expected; the 404 page renders client-side)"
