@@ -1,0 +1,10 @@
+# Netlify build settings. With this committed, connecting the repo needs no
+# manual configuration — Netlify reads the command and publish directory here.
+# SPA routing is handled by apps/web/public/_redirects, which is copied into
+# the build output.
+[build]
+  command = "npm run build"
+  publish = "dist/apps/web"
+
+[build.environment]
+  NODE_VERSION = "22"
