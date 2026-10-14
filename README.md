@@ -51,22 +51,23 @@ The output in `dist/apps/web/` is fully static — deploy it to any static host.
 
 ## Deploy
 
-Any static host works. The site is a single-page app, so the host must serve
-`index.html` for unknown paths (deep links like `/blog/...`); the config for
-that is already included per host.
-
-**Cloudflare Pages / Netlify** (recommended — connect the repo, auto-deploy on push):
+Live on **Vercel**, deployed automatically from this repo.
 
 | Setting | Value |
 | --- | --- |
+| Project | `derekcolebowen` |
 | Build command | `npm run build` |
-| Build output directory | `dist/apps/web` |
-| Node version | `22` |
+| Output directory | `dist/apps/web` |
+| Node version | `22.x` |
 
-`public/_redirects` handles the SPA fallback on both.
+`vercel.json` holds these settings plus the SPA rewrite, so pushes to `main`
+build and deploy without any dashboard configuration. Every push to `main`
+ships to production.
 
-**Hostinger / any Apache host:** upload the contents of `dist/apps/web/`.
-`public/.htaccess` (copied into the build) handles the SPA fallback.
+Other hosts are pre-configured too, if this ever needs to move:
+`netlify.toml` (Netlify), `apps/web/public/_redirects` (Netlify/Cloudflare
+Pages) and `apps/web/public/.htaccess` (Apache/Hostinger) all carry the same
+build and SPA-routing settings.
 
 ## Notes
 
