@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import CanonicalTag from './components/CanonicalTag';
 import { Toaster } from '@/components/ui/toaster';
@@ -105,6 +106,7 @@ function App() {
           <InteractiveContactButton />
           <BottomNavigation />
           <Toaster />
+          <Analytics />
         </div>
       </Router>
     </AdminAuthProvider>
