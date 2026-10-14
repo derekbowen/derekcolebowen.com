@@ -1,15 +1,29 @@
+# Derek Bowen
+
+> Commercial driver, marketplace founder and software builder in Riverside, California.
+
 ## Pages
-- [About | Derek Bowen](/about): Learn about Derek Bowen
-- [Blog & Journal | Derek Bowen](/blog): Read articles by Derek Bowen on logistics, digital marketing, programmatic SEO, and entrepreneurship.
-- [Blog | Derek Bowen](/blog): Read articles by Derek Bowen on programmatic SEO, marketplaces, logistics, and entrepreneurship.
-- [Connect | Derek Bowen](/subscribe): Connect with Derek Bowen on LinkedIn for insights on programmatic SEO, marketplace strategy, and logistics innovation.
-- [Derek Bowen - Programmatic SEO & Logistics Operator](/): Programmatic SEO + Logistics Operator Building Marketplaces. Versatile professional blending 20+ years logistics expertise with entrepreneurial success.
-- [founders.click - Growth Engine for Sharetribe Founders](/founders-click): The all-in-one growth engine built for Sharetribe marketplace founders. Custom-coded SEO, AI-powered content generation, and operational dashboards.
-- [I Had a Game Boy, These Kids Have AI | Derek Bowen](/blog/game-boy-ai): Why there
-- [Page Not Found — Derek Bowen](/*): No description available
-- [Privacy Policy | Derek Bowen](/privacy-policy): No description available
-- [PRNM Corp | Pool Rental Near Me](/pool-rental-near-me): Discover PRNM Corp, the premier digital marketplace for pool rental services connecting owners and renters.
-- [Services for Developers | Derek Bowen](/services-for-developers): I help fellow developers solve real problems using my AppSumo toolkit and licenses. Email, SEO, No-Code, AI, and more.
-- [Terms of Service | Derek Bowen](/terms-of-service): No description available
-- [The Fucking Truth About Trucking | Derek Bowen](/blog/trucking-truth): Why 560,000 CDL holders don
-- [Work With Me | Derek Bowen](/work-with-me): Partner with Derek Bowen for marketplace strategy, programmatic SEO architecture, and fractional leadership.
+- [Derek Bowen](https://derekcolebowen.com/): Commercial driver, marketplace founder and software builder. The work, the writing, and honest status on every project.
+- [About Derek Bowen](https://derekcolebowen.com/about): 20+ years in commercial transportation and carnival operations, self-taught software, five books, three kids.
+- [Work](https://derekcolebowen.com/work): Every project by category: marketplaces, SaaS & safety, logistics & automation, publishing.
+- [Pool Rental Near Me](https://derekcolebowen.com/work/pool-rental-near-me): Case study: what was built, what shipped, and what is still unverified.
+- [Carnival Ride Rental](https://derekcolebowen.com/work/carnival-ride-rental): Case study: what was built, what shipped, and what is still unverified.
+- [UOutdoors](https://derekcolebowen.com/work/uoutdoors): Case study: what was built, what shipped, and what is still unverified.
+- [Ferris Wheel Rental US](https://derekcolebowen.com/work/ferris-wheel-rental): Case study: what was built, what shipped, and what is still unverified.
+- [founders.click](https://derekcolebowen.com/work/founders-click): Case study: what was built, what shipped, and what is still unverified.
+- [Carnival Safety Institute](https://derekcolebowen.com/work/carnival-safety-institute): Case study: what was built, what shipped, and what is still unverified.
+- [Rental Waivers](https://derekcolebowen.com/work/rental-waivers): Case study: what was built, what shipped, and what is still unverified.
+- [Carnival Fleet Dispatch](https://derekcolebowen.com/work/carnival-fleet-dispatch): Case study: what was built, what shipped, and what is still unverified.
+- [Technical SEO & Automation Systems](https://derekcolebowen.com/seo-systems): 10,000+ pages generated, and an honest account of how many were deployed, indexed and earning clicks.
+- [Writing & Books](https://derekcolebowen.com/writing): Articles on trucking, marketplaces, AI tools and programmatic SEO, plus five books on Amazon.
+- [The $1,700 Sitemap (And Why I Stopped Waiting on Developers)](https://derekcolebowen.com/blog/1700-sitemap): Article by Derek Bowen.
+- [The Marketplace Graveyard: Why Most Founders Pack It In (And Why I Won’t)](https://derekcolebowen.com/blog/marketplace-graveyard): Article by Derek Bowen.
+- [The Digital Waiting Room: My Life as a “Crawled, Currently Not Indexed” URL](https://derekcolebowen.com/blog/digital-waiting-room): Article by Derek Bowen.
+- [The Fucking Truth About Trucking: It’s a Shit Job With Massive Opportunities](https://derekcolebowen.com/blog/trucking-truth): Article by Derek Bowen.
+- [I Had a Game Boy, These Kids Have AI: Why There’s No Fucking Excuse Anymore](https://derekcolebowen.com/blog/game-boy-ai): Article by Derek Bowen.
+- [Scaling with Programmatic SEO: A Practical Guide](https://derekcolebowen.com/blog/scaling-with-programmatic-seo): Article by Derek Bowen.
+- [The Intersection of Logistics and Digital Innovation](https://derekcolebowen.com/blog/logistics-digital-innovation): Article by Derek Bowen.
+- [Why Every Entrepreneur Should Write a Book](https://derekcolebowen.com/blog/entrepreneur-book-writing): Article by Derek Bowen.
+- [Journey](https://derekcolebowen.com/journey): A timeline from carnival lots and a Class A CDL to marketplaces and operations software.
+- [Now](https://derekcolebowen.com/now): What Derek is working on, driving and writing this month.
+- [Contact](https://derekcolebowen.com/contact): How to reach Derek Bowen.
